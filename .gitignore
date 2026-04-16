@@ -1,0 +1,14 @@
+# Local build outputs
+out/
+build/
+
+# Editor/OS noise
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+
+# Local environment files
+.env
+.env.*
