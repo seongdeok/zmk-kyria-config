@@ -1,0 +1,22 @@
+services:
+  zmk:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    working_dir: /workspaces/zmk-config
+    stdin_open: true
+    tty: true
+    security_opt:
+      - label=disable
+    environment:
+      ZMK_DIR: /workspaces/zmk
+      ZMK_CONFIG_DIR: /workspaces/zmk-config/config
+      ZMK_CONFIG_REPO: /workspaces/zmk-config
+    volumes:
+      - .:/workspaces/zmk-config
+      - zmk-root-user:/root
+      - zmk-src:/workspaces/zmk
+
+volumes:
+  zmk-root-user:
+  zmk-src:
