@@ -40,9 +40,15 @@ build_target() {
     local side="$1"
     local shield="$2"
     local build_dir="${build_root}/${side}"
+    local snippet_args=()
+
+    if [[ "${shield}" == "kyria_left" ]] && [[ -f "${config_dir}/kyria_left.conf" ]] \
+        && grep -q '^CONFIG_ZMK_STUDIO=y$' "${config_dir}/kyria_left.conf"; then
+        snippet_args=(-S studio-rpc-usb-uart)
+    fi
 
     cd "${app_dir}"
-    west build -d "${build_dir}" -p -b "${board}" -- -DSHIELD="${shield}" -DZMK_CONFIG="${config_dir}"
+    west build -d "${build_dir}" -p -b "${board}" "${snippet_args[@]}" -- -DSHIELD="${shield}" -DZMK_CONFIG="${config_dir}"
     copy_artifact "${build_dir}" "${shield}"
 }
 
