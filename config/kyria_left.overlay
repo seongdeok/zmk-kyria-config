@@ -1,5 +1,5 @@
 
-    &kscan_0 {
+    &kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
         label = "KSCAN_LEFT";
         diode-direction = "col2row";
