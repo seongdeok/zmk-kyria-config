@@ -14,26 +14,38 @@
 
         default_layer {
             display-name = "Default Layer";
-            bindings = <
-    /* 1번 줄 (12키) */
-    &kp ESC   &kp Q &kp W &kp E &kp R &kp T                                      &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
-    /* 2번 줄 (12키) */
-    &kp TAB   &kp A &kp S &kp D &kp F &kp G                                      &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-    /* 3번 줄 (12키) */
-    &kp LSHFT &kp Z &kp X &kp C &kp V &kp B                                      &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RCTRL
-    /* 4번 엄지 줄 (14키 = 양쪽 7키씩) : 기존 엄지 5키 + 안쪽 남는 1키 + 인코더 빈자리 1키(MUTE/PP) */
-    &kp LSHFT &kp C_MUTE &kp LGUI &kp DEL &kp RET &kp SPACE &kp ESC        &mo 1 &kp C_PP &kp RET &kp SPACE &kp TAB &kp BSPC &kp RALT
-            >;
-        };
+// ---------------------------------------------------------------------------------------------------------------------------------
+// |  ESC  |  Q  |  W  |  E   |  R   |  T   |                                          |  Y   |  U    |  I    |  O   |   P   |   \  |
+// |  TAB  |  A  |  S  |  D   |  F   |  G   |                                          |  H   |  J    |  K    |  L   |   ;   |   '  |
+// | SHIFT |  Z  |  X  |  C   |  V   |  B   | L SHIFT | L SHIFT |  | LAYER 1 | L SHIFT |  N   |  M    |  ,    |  .   |   /   | CTRL |
+//                     | GUI  | DEL  | RET  |  SPACE  |   ESC   |  |   RET   |  SPACE  | TAB  | BSPC  | R-ALT |
+         bindings = <
+&kp A &kp B &kp C &kp D &kp E &kp F                            &kp LS(A) &kp LS(B) &kp LS(C) &kp LS(D) &kp LS(E) &kp LS(F)
+&kp G &kp H &kp I &kp J &kp K &kp L                            &kp LS(G) &kp LS(H) &kp LS(I) &kp LS(J) &kp LS(K) &kp LS(L)
+&kp M &kp N &kp O &kp P &kp Q &kp R &kp S            &kp LS(M) &kp LS(N) &kp LS(O) &kp LS(P) &kp LS(Q) &kp LS(R) &kp LS(S)
+            &kp T &kp U &kp V &kp W &kp X &kp Y      &kp LS(T) &kp LS(U) &kp LS(V) &kp LS(W) &kp LS(X) &kp LS(Y)
 
+>;
+
+        };
         function_layer {
             display-name = "Function Layer";
+// ---------------------------------------------------------------------------------------------------------------------------------
+// |       |      |BT_CLR|BTSEL0|BTSEL1|BTSEL2|                                         |      |      |      |      |      |      |
+// |       |      |      |BTSEL3|BTSEL4|      |                                         |      |      |      |      |      |      |
+// |       |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
+//                       |      |      |      |      |      |      |      |      |      |      |      |      |
             bindings = <
     &trans &trans &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2              &trans &trans &trans &trans &trans &trans
     &trans &trans &trans     &bt BT_SEL 3 &bt BT_SEL 4 &trans                    &trans &trans &trans &trans &trans &trans
-    &trans &trans &trans     &trans       &trans       &trans                    &trans &trans &trans &trans &trans &trans
-    &trans &trans &trans     &trans       &trans       &trans       &trans       &trans &trans &trans &trans &trans &trans &trans
+    &trans &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans &trans
+                         &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans
+&trans &trans &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2      &trans &trans &trans &trans &trans &trans
+&trans &trans &trans     &bt BT_SEL 3 &bt BT_SEL 4 &trans            &trans &trans &trans &trans &trans &trans
+&trans &trans &trans     &trans       &trans       &trans            &trans &trans &trans &trans &trans &trans
+&trans &trans &trans     &trans       &trans       &trans &trans     &trans &trans &trans &trans &trans &trans &trans
             >;
+
         };
     };
 };
