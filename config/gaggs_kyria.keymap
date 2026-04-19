@@ -1,0 +1,39 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            display-name = "Default Layer";
+            bindings = <
+    /* 1번 줄 (12키) */
+    &kp ESC   &kp Q &kp W &kp E &kp R &kp T                                      &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
+    /* 2번 줄 (12키) */
+    &kp TAB   &kp A &kp S &kp D &kp F &kp G                                      &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
+    /* 3번 줄 (12키) */
+    &kp LSHFT &kp Z &kp X &kp C &kp V &kp B                                      &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RCTRL
+    /* 4번 엄지 줄 (14키 = 양쪽 7키씩) : 기존 엄지 5키 + 안쪽 남는 1키 + 인코더 빈자리 1키(MUTE/PP) */
+    &kp LSHFT &kp C_MUTE &kp LGUI &kp DEL &kp RET &kp SPACE &kp ESC        &mo 1 &kp C_PP &kp RET &kp SPACE &kp TAB &kp BSPC &kp RALT
+            >;
+        };
+
+        function_layer {
+            display-name = "Function Layer";
+            bindings = <
+    &trans &trans &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2              &trans &trans &trans &trans &trans &trans
+    &trans &trans &trans     &bt BT_SEL 3 &bt BT_SEL 4 &trans                    &trans &trans &trans &trans &trans &trans
+    &trans &trans &trans     &trans       &trans       &trans                    &trans &trans &trans &trans &trans &trans
+    &trans &trans &trans     &trans       &trans       &trans       &trans       &trans &trans &trans &trans &trans &trans &trans
+            >;
+        };
+    };
+};
