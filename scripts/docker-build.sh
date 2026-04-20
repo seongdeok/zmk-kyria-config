@@ -42,10 +42,11 @@ build_target() {
     local build_dir="${build_root}/${side}"
     local snippet_args=()
 
-    if [[ "${shield}" == "gaggs_kyria_left" ]]; then
+    if [[ "${shield}" == "gaggs_kyria_left" ]] && grep -Eq '^CONFIG_ZMK_STUDIO=y$' \
+        "${config_dir}/gaggs_kyria.conf" "${config_dir}/gaggs_kyria_left.conf" 2>/dev/null; then
         snippet_args=(-S studio-rpc-usb-uart)
     fi
-    echo "XXXXXXX shield ${shield} snippet_args: ${snippet_args[*]}"
+
     cd "${app_dir}"
     west build -d "${build_dir}" -p -b "${board}" "${snippet_args[@]}" -- -DSHIELD="${shield}" -DZMK_CONFIG="${config_dir}"
     copy_artifact "${build_dir}" "${shield}"
