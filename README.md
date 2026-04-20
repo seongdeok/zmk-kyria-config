@@ -127,3 +127,14 @@ For nice!nano v2, local Docker builds produce UF2 files normally, but flashing i
 1. Adjust `build.yaml` if your MCU board is not nice!nano v2.
 2. Edit `config/kyria.keymap` to your preferred layout.
 3. Run `docker compose run --rm zmk ./scripts/docker-build.sh all` for local builds, or push to GitHub for Actions builds.
+
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+// |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                          |  Y   |  U    |  I    |  O   |   P   |   \  |
+// |  ESC  |  A  |  S  |  D   |  F   |  G   |                                          |  H   |  J    |  K    |  L   |   ;   |   '  |
+// | EN/KO |  Z  |  X  |  C   |  V   |  B   | N | L SHIFT |              | LAYER 1 | B |  N   |  M    |  ,    |  .   |   /   | CTRL |
+//               | Num |  DEL  | GUI  | SHIFT | SPACE  |                |  RET   |  SHIFT   |  ALT   |  BSPC  | SYMBOL |
+
+
+
+            
