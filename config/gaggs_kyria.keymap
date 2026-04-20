@@ -9,43 +9,95 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
+    behaviors {
+        hmr: hmr {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HMR";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <300>;
+            quick-tap-ms = <200>;
+            require-prior-idle-ms = <250>;
+            flavor = "tap-preferred";
+        };
+
+        hmr_mo: hmr_mo {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HMR_MO";
+            bindings = <&mo>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <250>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <200>;
+            flavor = "tap-preferred";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             display-name = "Default Layer";
 // ---------------------------------------------------------------------------------------------------------------------------------
-// |  ESC  |  Q  |  W  |  E   |  R   |  T   |                                          |  Y   |  U    |  I    |  O   |   P   |   \  |
-// |  TAB  |  A  |  S  |  D   |  F   |  G   |                                          |  H   |  J    |  K    |  L   |   ;   |   '  |
-// | SHIFT |  Z  |  X  |  C   |  V   |  B   | L SHIFT | L SHIFT |  | LAYER 1 | L SHIFT |  N   |  M    |  ,    |  .   |   /   | CTRL |
-//                     | GUI  | DEL  | RET  |  SPACE  |   ESC   |  |   RET   |  SPACE  | TAB  | BSPC  | R-ALT |
-         bindings = <
-&kp A &kp B &kp C &kp D &kp E &kp F                            &kp LS(A) &kp LS(B) &kp LS(C) &kp LS(D) &kp LS(E) &kp LS(F)
-&kp G &kp H &kp I &kp J &kp K &kp L                            &kp LS(G) &kp LS(H) &kp LS(I) &kp LS(J) &kp LS(K) &kp LS(L)
-&kp M &kp N &kp O &kp P &kp Q &kp R &kp S            &kp LS(M) &kp LS(N) &kp LS(O) &kp LS(P) &kp LS(Q) &kp LS(R) &kp LS(S)
-            &kp T &kp U &kp V &kp W &kp X &kp Y      &kp LS(T) &kp LS(U) &kp LS(V) &kp LS(W) &kp LS(X) &kp LS(Y)
+// |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                          |  Y   |  U    |  I    |  O   |   P   |   \  |
+// |  ESC  |  A  |  S  |  D   |  F   |  G   |                                          |  H   |  J    |  K    |  L   |   ;   |   '  |
+// | CTRL  |  Z  |  X  |  C   |  V   |  B   | N |                                  | B |  N   |  M    |  ,    |  .   |   /   | CTRL |
+//               | Num |  KOR | GUI  | SHIFT | SPACE  | DEL |            | BSPC    |  RET   |  SHIFT   |  ALT   |  BSPC  | SYMBOL |
 
->;
-
-        };
-        function_layer {
-            display-name = "Function Layer";
-// ---------------------------------------------------------------------------------------------------------------------------------
-// |       |      |BT_CLR|BTSEL0|BTSEL1|BTSEL2|                                         |      |      |      |      |      |      |
-// |       |      |      |BTSEL3|BTSEL4|      |                                         |      |      |      |      |      |      |
-// |       |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
-//                       |      |      |      |      |      |      |      |      |      |      |      |      |
-            bindings = <
-    &trans &trans &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2              &trans &trans &trans &trans &trans &trans
-    &trans &trans &trans     &bt BT_SEL 3 &bt BT_SEL 4 &trans                    &trans &trans &trans &trans &trans &trans
-    &trans &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans &trans
-                         &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans
-&trans &trans &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2      &trans &trans &trans &trans &trans &trans
-&trans &trans &trans     &bt BT_SEL 3 &bt BT_SEL 4 &trans            &trans &trans &trans &trans &trans &trans
-&trans &trans &trans     &trans       &trans       &trans            &trans &trans &trans &trans &trans &trans
-&trans &trans &trans     &trans       &trans       &trans &trans     &trans &trans &trans &trans &trans &trans &trans
+        bindings = <
+&kp TAB         &kp Q         &kp W            &kp E            &kp R              &kp T                                &kp Y    &kp U              &kp I            &kp O            &kp P                   &kp BSPC
+&hmr_mo 1 ESC   &hmr LCTRL A  &hmr LEFT_WIN S  &hmr LEFT_ALT D  &hmr LEFT_SHIFT F  &kp G                                &kp H    &hmr LEFT_SHIFT J  &hmr LEFT_ALT K  &hmr LEFT_GUI L  &hmr LEFT_CONTROL SEMI  &kp SQT
+&kp LCTRL       &kp Z         &kp X            &kp C            &kp V              &kp B      &kp N            &kp B    &kp N    &kp M              &kp COMMA        &kp DOT          &kp FSLH                &kp RIGHT_SHIFT
+                 &mo 3        &kp LS(SPACE)    &kp LGUI         &kp LSHIFT         &kp SPACE  &kp DEL          &kp BSPC   &kp RET &kp LSHIFT &kp LEFT_ALT  &kp LS(SPACE)  &mo 2
             >;
 
+
         };
+
+                nav_layer {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
+            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
+            // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+
+            display-name = "Navigation";
+            bindings = <
+&kp TAB    &kp F1          &kp F2          &kp F3        &kp F4     &kp F5                        &kp F6    &kp F7         &kp F8    &kp F9     &kp F10        &kp BACKSPACE
+&trans     &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT  &trans                        &kp LEFT  &kp DOWN       &kp UP    &kp RIGHT  &kp PAGE_UP    &trans
+&kp LSHFT  &kp LA(Z)       &trans          &kp LA(C)     &kp LA(V)  &trans  &trans        &trans  &kp DEL   &kp BACKSPACE  &kp HOME  &kp END    &kp PAGE_DOWN  &trans
+           &trans          &trans          &trans        &trans     &trans  &trans        &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        symbol_layer {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
+            // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
+            // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+
+            display-name = "Symbol";
+            bindings = <
+&kp TAB    &kp EXCL      &kp AT        &kp HASH      &kp DLLR      &kp PRCNT                                  &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp BSPC
+&kp LCTRL  &trans        &trans        &trans        &trans        &trans                                     &kp MINUS  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
+&kp LSHFT  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR &trans                &trans    &kp UNDER  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
+           &trans        &trans        &trans        &trans        &trans     &trans                &trans    &trans     &trans     &trans           &trans    &trans
+
+            >;
+        };
+
+        system_layer {
+            display-name = "System";
+            bindings = <
+&trans  &trans    &trans    &trans        &trans     &trans                              &trans        &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans   &trans
+&trans  &kp LEFT  &kp DOWN  &kp UP_ARROW  &kp RIGHT  &trans                              &trans        &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &trans   &trans
+&trans  &trans    &trans    &trans        &trans     &trans  &trans             &trans   &kp NUMBER_0  &kp N7        &kp N8        &kp N9        &kp DOT  &trans
+        &trans    &trans    &trans        &trans     &trans  &trans             &trans  &trans  &trans  &trans &trans &trans
+            >;
+        };
+        
     };
 };
