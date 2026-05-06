@@ -33,6 +33,16 @@
             require-prior-idle-ms = <200>;
             flavor = "tap-preferred";
         };
+        hms: homerow_mods_shift {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";          // tap-preferred 쓰지 말것
+            tapping-term-ms = <150>;      // shift는 더 짧게
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <80>; // 낮게 설정
+            hold-trigger-on-release;       // 이게 핵심
+            bindings = <&kp>, <&kp>;
+        };
     };
 
     keymap {
