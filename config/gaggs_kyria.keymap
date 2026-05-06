@@ -42,6 +42,21 @@
             require-prior-idle-ms = <80>; // 낮게 설정
             hold-trigger-on-release;       // 이게 핵심
             bindings = <&kp>, <&kp>;
+
+        // Right-hand homerow mods restricted to left-hand trigger keys.
+        // Hold only fires when a left-hand key is pressed simultaneously,
+        // preventing mod activation during vim hjkl navigation and repeat keys.
+        hmr_r: hmr_r {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HMR_R";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <300>;
+            quick-tap-ms = <200>;
+            require-prior-idle-ms = <250>;
+            flavor = "tap-preferred";
+            hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 30 38 39 40 41 42 43>;
         };
     };
 
@@ -59,7 +74,7 @@
 &kp TAB        &kp Q         &kp W           &kp E           &kp R              &kp T                              &kp Y   &kp U              &kp I           &kp O           &kp P                  &kp BSPC
 &hmr_mo 1 ESC  &hmr LCTRL A  &hmr LEFT_WIN S &hmr LEFT_ALT D &hmr LEFT_SHIFT F  &kp G                              &kp H   &hmr LEFT_SHIFT J  &hmr LEFT_ALT K &hmr LEFT_GUI L &hmr LEFT_CONTROL SEMI &kp SQT
 &kp LSHIFT     &kp Z         &kp X           &kp C           &kp V              &kp B     &kp N         &kp B      &kp N   &kp M              &kp COMMA       &kp DOT         &kp FSLH               &kp TILDE
-               &kp LSHIFT    &kp LC(SPACE)   &kp LSHIFT      &mo 3              &kp SPACE &kp DEL       &kp BSPC   &kp RET &mo 2              &kp LSHIFT    &kp LC(SPACE)   &kp LSHIFT
+               &kp LSHIFT    &kp LC(SPACE)   &kp LGUI      &mo 3              &kp SPACE &kp DEL       &kp BSPC   &kp RET &mo 2              &kp LSHIFT    &kp LC(SPACE)   &kp LSHIFT
             >;
         };
 
@@ -74,7 +89,7 @@
 &kp TAB    &kp F1         &kp F2         &kp F3       &kp F4     &kp F5                       &kp F6    &kp F7        &kp F8    &kp F9    &kp F10       &kp BACKSPACE
 &trans     &kp LEFT_ARROW &kp DOWN_ARROW &kp UP_ARROW &kp RIGHT  &trans                       &kp LEFT  &kp DOWN      &kp UP    &kp RIGHT &kp PAGE_UP   &trans
 &kp LSHFT  &kp LA(Z)      &trans         &kp LA(C)    &kp LA(V)  &trans  &trans      &trans   &kp DEL   &kp BACKSPACE &kp HOME  &kp END   &kp PAGE_DOWN &trans
-           &trans         &trans         &trans       &trans     &trans  &trans      &trans   &trans    &trans        &trans    &trans    &trans
+           &trans         &trans         &trans       &trans     &kp LC(SPACE)  &trans      &trans   &trans    &trans        &trans    &trans    &trans
             >;
         };
 
