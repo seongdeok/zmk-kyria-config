@@ -42,6 +42,7 @@
             require-prior-idle-ms = <80>; // 낮게 설정
             hold-trigger-on-release;       // 이게 핵심
             bindings = <&kp>, <&kp>;
+        };
 
         // Right-hand homerow mods restricted to left-hand trigger keys.
         // Hold only fires when a left-hand key is pressed simultaneously,
