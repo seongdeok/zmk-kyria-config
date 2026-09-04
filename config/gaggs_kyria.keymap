@@ -43,7 +43,6 @@
             tapping-term-ms = <175>;      // 기존 150에서 소폭 증가
             quick-tap-ms = <175>;
             require-prior-idle-ms = <100>; // 기존 80에서 소폭 증가
-            hold-trigger-on-release;       // 기존 동작 유지
             bindings = <&kp>, <&kp>;
         };
 
