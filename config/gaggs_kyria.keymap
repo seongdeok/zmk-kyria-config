@@ -7,8 +7,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/pointing.h>
-
 
 / {
     behaviors {
@@ -33,37 +31,15 @@
             require-prior-idle-ms = <75>;
             flavor = "hold-preferred";
         };
-        // 왼손 Shift (F키 전용: 오른손 전체 + 왼손 엄지 스페이스 허용)
-        // F키 전용: y, u, i, o, p, h, j, k, l, n, m + Space(42)
-        hms_l: hms_l {
+        hms: homerow_mods_shift {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <175>;
-            quick-tap-ms = <135>;
+            flavor = "balanced";          // tap-preferred 쓰지 말것
+            tapping-term-ms = <175>;      // 기존 150에서 소폭 증가
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <100>; // 기존 80에서 소폭 증가
+            hold-trigger-on-release;       // 기존 동작 유지
             bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <
-                6 7 8 9 10
-                18 19 20 21
-                32 33
-                42
-            >;
-        };
-        
-        // J키 전용: q, w, e, r, t, a, s, d, f, g, z, x, c, v, b + Space(42)
-        hms_r: hms_r {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <175>;
-            quick-tap-ms = <135>;
-            bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <
-                1 2 3 4 5
-                13 14 15 16 17
-                25 26 27 28 29
-                42
-            >;
         };
 
         // Right-hand homerow mods restricted to left-hand trigger keys.
@@ -81,29 +57,6 @@
             flavor = "tap-preferred";
             hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 30 38 39 40 41 42 43>;
         };
-        msmv: mouse_move {
-            acceleration-exponent = <1>;
-            time-to-max-speed-ms = <1000>;
-            delay-ms = <0>;
-        };
-        
-        msscr: mouse_scroll {
-            acceleration-exponent = <0>;
-            time-to-max-speed-ms = <1000>;
-            delay-ms = <0>;
-        };
-
-        th_lt: thumb_layer_tap {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-
-            flavor = "balanced";
-
-            tapping-term-ms = <200>;
-            quick-tap-ms = <150>;
-
-            bindings = <&mo>, <&kp>;
-        };
     };
 
     keymap {
@@ -118,7 +71,7 @@
             //          │LSHIFT│LC(SPACE)│  LGUI   │   SYS/3   │SPACE │ DEL │         │BSPC│ RET  │  SYM/2    │  LALT   │LC(SPACE)│   LSHIFT   │
             bindings = <
 &kp TAB        &kp Q         &kp W           &kp E           &kp R              &kp T                              &kp Y   &kp U              &kp I           &kp O           &kp P                  &kp BSPC
-&hmr_mo 1 ESC  &hmr LCTRL A  &hmr LEFT_WIN S &hmr LEFT_ALT D &hms_l LEFT_SHIFT F  &kp G                            &kp H   &hms_r LEFT_SHIFT J  &hmr LEFT_ALT K &hmr LEFT_GUI L &hmr LEFT_CONTROL SEMI &kp SQT
+&hmr_mo 1 ESC  &hmr LCTRL A  &hmr LEFT_WIN S &hmr LEFT_ALT D &hms LEFT_SHIFT F  &kp G                              &kp H   &hms LEFT_SHIFT J  &hmr LEFT_ALT K &hmr LEFT_GUI L &hmr LEFT_CONTROL SEMI &kp SQT
 &kp LSHIFT     &kp Z         &kp X           &kp C           &kp V              &kp B     &kp N         &kp B      &kp N   &kp M              &kp COMMA       &kp DOT         &kp FSLH               &kp TILDE
                &kp LSHIFT    &kp LC(SPACE)   &kp LGUI        &mo 3              &kp SPACE  &kp DEL   &kp BSPC      &kp RET &mo 2              &kp LSHIFT  &kp LC(SPACE)      &kp LSHIFT
             >;
@@ -129,12 +82,12 @@
             // ┌────────┬────────┬────────┬────────┬────────┬────────┐                        ┌────────┬────────┬────────┬────────┬────────┬────────┐
             // │  TAB   │   F1   │   F2   │   F3   │   F4   │   F5   │                        │   F6   │   F7   │   F8   │   F9   │  F10   │  bspc  │
             // │ trans  │  LEFT  │  DOWN  │   UP   │ RIGHT  │ trans  │                        │  LEFT  │  DOWN  │   UP   │ RIGHT  │ PG_UP  │ trans  │
-            // │ LSHFT  │ LA(Z)  │ trans  │ LA(C)  │ LA(V)  │ trans  │ trans  │      │ trans  │  HOME  │  PG_DN │ PG_UP  │  END   │ PG_DN  │ trans  │
+            // │ LSHFT  │ LA(Z)  │ trans  │ LA(C)  │ LA(V)  │ trans  │ trans  │      │ trans  │  DEL   │  BSPC  │  HOME  │  END   │ PG_DN  │ trans  │
             //          │ trans  │ trans  │ trans  │ trans  │ trans  │ trans  │      │ trans  │ trans  │ trans  │ trans  │ trans  │
             bindings = <
-&kp TAB    &kp F1         &kp F2         &kp F3       &kp F4     &kp F5                       &kp F6    &kp F7        &kp F8      &kp F9    &kp F10       &kp BACKSPACE
-&trans     &kp LEFT_ARROW &kp DOWN_ARROW &kp UP_ARROW &kp RIGHT  &trans                       &kp LEFT  &kp DOWN      &kp UP      &kp RIGHT &kp PAGE_UP   &trans
-&kp LSHFT  &kp LA(Z)      &trans         &kp LA(C)    &kp LA(V)  &trans  &trans      &trans   &kp HOME  &kp PAGE_DOWN &kp PAGE_UP &kp END   &trans        &trans
+&kp TAB    &kp F1         &kp F2         &kp F3       &kp F4     &kp F5                       &kp F6    &kp F7        &kp F8    &kp F9    &kp F10       &kp BACKSPACE
+&trans     &kp LEFT_ARROW &kp DOWN_ARROW &kp UP_ARROW &kp RIGHT  &trans                       &kp LEFT  &kp DOWN      &kp UP    &kp RIGHT &kp PAGE_UP   &trans
+&kp LSHFT  &kp LA(Z)      &trans         &kp LA(C)    &kp LA(V)  &trans  &trans      &trans   &kp DEL   &kp BACKSPACE &kp HOME  &kp END   &kp PAGE_DOWN &trans
            &trans         &trans         &trans       &trans     &kp LC(SPACE)  &trans      &trans   &trans    &trans        &trans    &trans    &trans
             >;
         };
