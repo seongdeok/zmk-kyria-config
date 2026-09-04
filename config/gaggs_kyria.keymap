@@ -7,10 +7,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
-
-
 
 
 / {
@@ -61,13 +58,13 @@
             flavor = "tap-preferred";
             hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 30 38 39 40 41 42 43>;
         };
-        mmv: mmv {
+        msmv: mouse_move {
             acceleration-exponent = <1>;
             time-to-max-speed-ms = <1000>;
             delay-ms = <0>;
         };
         
-        msc: msc {
+        msscr: mouse_scroll {
             acceleration-exponent = <0>;
             time-to-max-speed-ms = <1000>;
             delay-ms = <0>;
