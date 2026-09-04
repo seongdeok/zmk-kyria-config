@@ -38,8 +38,8 @@
             #binding-cells = <2>;
             flavor = "balanced";          // tap-preferred 쓰지 말것
             tapping-term-ms = <175>;      // 기존 150에서 소폭 증가
-            quick-tap-ms = <175>;
-            require-prior-idle-ms = <100>; // 기존 80에서 소폭 증가
+            quick-tap-ms = <120>;
+            require-prior-idle-ms = <50>; // 기존 80에서 소폭 증가
             bindings = <&kp>, <&kp>;
         };
 
